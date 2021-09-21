@@ -18,7 +18,7 @@
 #
 
 name: CI - Build pulsar
-on: workflow_dispatch
+on: push
 
 env:
   MAVEN_OPTS: -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.http.retryHandler.class=standard -Dmaven.wagon.http.retryHandler.count=3
