@@ -80,6 +80,7 @@ jobs:
 
       - name: push pulsar-all
         run: |
+          docker images -a
           for img in $(docker images -a --filter "reference=pulsar-all" --format={{.Repository}}:{{.Tag}}); do
             docker tag $img pratikimprowise/$img
             docker push pratikimprowise/$img
