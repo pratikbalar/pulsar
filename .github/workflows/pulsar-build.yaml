@@ -26,15 +26,15 @@ env:
 jobs:
 
   process:
-    runs-on: ubuntu-latest
+    runs-on: buildjet-2vcpu-ubuntu-2004
     timeout-minutes: 120
 
     steps:
       - name: checkout
         uses: actions/checkout@v2
 
-      - name: Tune Runner VM
-        uses: ./.github/actions/tune-runner-vm
+      # - name: Tune Runner VM
+      #   uses: ./.github/actions/tune-runner-vm
 
       - name: Cache local Maven repository
         uses: actions/cache@v2
@@ -56,12 +56,12 @@ jobs:
       - name: Replace maven's wagon-http version
         run: sudo ./build/replace_maven-wagon-http-version.sh
 
-      - name: clean disk
-        run: |
-          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
-          sudo apt clean
-          docker rmi $(docker images -q) -f
-          df -h
+      # - name: clean disk
+      #   run: |
+      #     sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
+      #     sudo apt clean
+      #     docker rmi $(docker images -q) -f
+      #     df -h
 
       - name: run install by skip tests
         run: mvn -B clean install -DskipTests -Dlicense.skip=true -U
